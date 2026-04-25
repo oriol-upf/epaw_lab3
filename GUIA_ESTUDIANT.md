@@ -54,9 +54,14 @@ A diferència del laboratori anterior, on cada petició era independent, en una 
 
 *   **Creació de la Sessió**: En el mètode `doPost` de `Login.java`, quan les credencials són vàlides, creem una sessió amb `request.getSession()`.
 *   **Scope de Sessió**: Guardem l'objecte `User` en la sessió: `session.setAttribute("user", user)`.
-*   **Persistència**: Gràcies a les **Cookies** (gestionades automàticament pel navegador i Tomcat), cada vegada que fem un `$('#content').load(...)`, el servidor sap quin usuari està fent la petició i pot personalitzar la vista (ex: mostrar el nom o la foto de l'usuari).
+*   **Persistència**: Gràcies a les **Cookies** (gestionades automàticament pel navegador i el servidor), cada vegada que fem un `$('#content').load(...)`, el servidor sap quin usuari està fent la petició i pot personalitzar la vista (ex: mostrar el nom o la foto de l'usuari).
 
 ## ✅ 5. Validació en Dos Passos
+
+Mantenim la seguretat de l'aplicació validant en ambdós costats:
+
+1.  **Al Client (JS)**: `LoginValidation.js` i `RegisterValidation.js` utilitzen la **Constraint Validation API** per donar feedback instantani a l'usuari (marges vermells/verds) abans d'enviar les dades.
+2.  **Al Servidor (Java)**: Dins de la capa de **Servei**, realitzem una validació manual camp per camp. Si trobem errors, retornem el fragment del formulari amb la llista d'errors perquè l'usuari els pugui corregir.
 
 ---
 
