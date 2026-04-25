@@ -5,6 +5,12 @@ import java.util.Map;
 
 import epaw.lab3.model.User;
 import epaw.lab3.repository.UserRepository;
+import jakarta.servlet.http.Part;
+
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class UserService {
 
@@ -59,6 +65,29 @@ public class UserService {
             errors.put("password", "The combination of name and password does not match in our dataabase");
         }
         return errors;
+    }
+
+    public String saveProfilePicture(Part filePart, String username) {
+        if (filePart == null || filePart.getSize() <= 0) {
+            return null;
+        }
+
+        try {
+            String fileName = filePart.getSubmittedFileName();
+            String extension = fileName.substring(fileName.lastIndexOf("."));
+            String newFileName = username + extension;
+
+            String resourcesDir = "EXTERNAL_RESOURCES";
+            Files.createDirectories(Paths.get(resourcesDir));
+
+            try (InputStream input = filePart.getInputStream()) {
+                Files.copy(input, Paths.get(resourcesDir, newFileName), StandardCopyOption.REPLACE_EXISTING);
+            }
+            return newFileName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

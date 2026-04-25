@@ -41,8 +41,8 @@ src/main/java/epaw/lab1/Solucio.java
 lab3.db
 
 # User Uploaded Images
-EXTERNAL_RESOURCES/images/*
-!EXTERNAL_RESOURCES/images/.gitkeep
+EXTERNAL_RESOURCES/*
+!EXTERNAL_RESOURCES/.gitkeep
 
 # Jasper JSP Compiler Output
 jsp/

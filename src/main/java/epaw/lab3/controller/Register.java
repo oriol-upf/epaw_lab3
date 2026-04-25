@@ -11,6 +11,7 @@ import epaw.lab3.service.UserService;
 
 import java.io.IOException;
 import java.util.Map;
+import jakarta.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -40,6 +41,8 @@ public class Register extends HttpServlet {
 
 		try {
 			BeanUtils.populate(user, request.getParameterMap());
+			String picturePath = userService.saveProfilePicture(request.getPart("picture"), user.getName());
+			user.setPicture(picturePath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
