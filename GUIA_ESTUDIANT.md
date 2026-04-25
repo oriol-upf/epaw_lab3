@@ -43,18 +43,20 @@ $(document).on("click", ".menu", function (event) {
 L'estructura interna del Java es manté robusta i organitzada:
 
 *   **Controladors (Servlets)**: Reben la petició AJAX, gestionen els paràmetres i decideixen quin fragment HTML (la vista) retornar.
-    *   **Gestió de Sessió**: En processos com el **Login**, el controlador és responsable de crear la sessió de l'usuari (`request.getSession()`) i guardar l'objecte `User` en l'**scope de sessió**. Això permet que l'usuari quedi "identificat" en posteriors crides AJAX, ja que el servidor podrà recuperar l'objecte de la sessió compartida.
 *   **Model (Repository/Service)**: 
     *   **Servei (`UserService`)**: Conté la lògica de negoci i les **validacions manuals**. Aquí és on comprovem si els camps són buits, si les contrasenyes segueixen el patró correcte o si l'usuari ja existeix.
     *   **Repositori (`UserRepository`)**: S'encarrega exclusivament de la persistència en la base de dades SQL.
 *   **Vistes (JSP/HTML)**: En lloc de generar documents complets, generen només el codi HTML necessari per al fragment (ex: el formulari, el missatge de benvinguda).
 
-## 🔐 4. Validació en Dos Passos
+## 🔐 4. Gestió d'Estat i Sessions
 
-Mantenim la seguretat de l'aplicació validant en ambdós costats:
+A diferència del laboratori anterior, on cada petició era independent, en una SPA necessitem que el servidor recordi qui som mentre naveguem pels diferents fragments.
 
-1.  **Al Client (JS)**: `LoginValidation.js` i `RegisterValidation.js` utilitzen la **Constraint Validation API** per donar feedback instantani a l'usuari (marges vermells/verds) abans d'enviar les dades.
-2.  **Al Servidor (Java)**: Dins de la capa de **Servei**, realitzem una validació manual camp per camp. Si trobem errors, retornem el fragment del formulari amb la llista d'errors perquè l'usuari els pugui corregir.
+*   **Creació de la Sessió**: En el mètode `doPost` de `Login.java`, quan les credencials són vàlides, creem una sessió amb `request.getSession()`.
+*   **Scope de Sessió**: Guardem l'objecte `User` en la sessió: `session.setAttribute("user", user)`.
+*   **Persistència**: Gràcies a les **Cookies** (gestionades automàticament pel navegador i Tomcat), cada vegada que fem un `$('#content').load(...)`, el servidor sap quin usuari està fent la petició i pot personalitzar la vista (ex: mostrar el nom o la foto de l'usuari).
+
+## ✅ 5. Validació en Dos Passos
 
 ---
 
