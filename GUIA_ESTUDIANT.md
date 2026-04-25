@@ -43,6 +43,7 @@ $(document).on("click", ".menu", function (event) {
 L'estructura interna del Java es manté robusta i organitzada:
 
 *   **Controladors (Servlets)**: Reben la petició AJAX, gestionen els paràmetres i decideixen quin fragment HTML (la vista) retornar.
+    *   **Gestió de Sessió**: En processos com el **Login**, el controlador és responsable de crear la sessió de l'usuari (`request.getSession()`) i guardar l'objecte `User` en l'**scope de sessió**. Això permet que l'usuari quedi "identificat" en posteriors crides AJAX, ja que el servidor podrà recuperar l'objecte de la sessió compartida.
 *   **Model (Repository/Service)**: 
     *   **Servei (`UserService`)**: Conté la lògica de negoci i les **validacions manuals**. Aquí és on comprovem si els camps són buits, si les contrasenyes segueixen el patró correcte o si l'usuari ja existeix.
     *   **Repositori (`UserRepository`)**: S'encarrega exclusivament de la persistència en la base de dades SQL.
