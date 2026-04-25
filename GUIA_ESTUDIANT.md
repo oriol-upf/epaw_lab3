@@ -25,7 +25,7 @@ $('#content').load("Content");   // Carrega el fragment del contingut inicial
 ```
 El mètode `.load()` de jQuery és especialment potent per dues raons:
 1.  **Inserció Automàtica**: Fa la petició GET i injecta el resultat directament al DOM.
-2.  **Execució de Scripts**: A diferència de mètodes natius com `innerHTML`, **`.load()` detecta i executa automàticament qualsevol etiqueta `<script>`** que vingui dins del fragment HTML. Això permet que cada fragment carregat pugui tenir la seva pròpia lògica Javascript sense haver de carregar-la tota l'inici.
+2.  **Execució de Scripts**: A diferència de mètodes natius com `innerHTML`, **`.load()` detecta i executa automàticament qualsevol etiqueta `<script>`** que vingui dins del fragment HTML. Això permet que cada fragment carregat pugui tenir la seva pròpia lògica Javascript sense haver de carregar-la tota a l'inici.
 
 ### 🔗 Captura d'Events de Navegació
 Per evitar que els enllaços recarreguin la pàgina sencera, "segrestem" el clic i el convertim en una crida AJAX:
@@ -57,19 +57,22 @@ Mantenim la seguretat de l'aplicació validant en ambdós costats:
 
 ---
 
-## 🎯 Objectiu del Lab 3: Implementació de Casos d'Ús
+## 🎯 Objectius del Lab 3
 
-L'objectiu final d'aquest laboratori és traslladar el disseny realitzat al **Seminari 2** (Diagrama de Casos d'Ús) a una aplicació web dinàmica funcional.
+L'objectiu final d'aquest laboratori és integrar tota la funcionalitat de registre anterior en una arquitectura d'aplicació web dinàmica funcional basada en el disseny del **Seminari 2**.
 
-Heu de modificar la plantilla per reflectir tots els casos d'ús identificats per als diferents rols:
-*   **Usuari Anònim**: (ex: Login, Registre).
-*   **Usuari Registrat**: (ex: Perfil personal, Timeline, Seguir/Deixar de seguir usuaris, Publicar missatges).
-*   **Administrador**: (ex: Gestió d'usuaris).
+### 🛠️ Reptes a assolir:
 
-### 📝 Tasques a realitzar:
-1.  **Adaptació de Menús**: El menú dinàmic ha de mostrar opcions diferents segons el rol de l'usuari que hagi iniciat sessió.
-2.  **Vistes "Fantasma" (Mockups)**: No cal implementar tota la lògica interna de cada cas d'ús encara. L'objectiu és que, en clicar una opció del menú, es carregui un fragment HTML que serveixi de **placeholder** (ex: un títol i una descripció de què es podrà fer en aquella secció).
-3.  **Navegació AJAX**: Tota la interacció entre aquestes seccions s'ha de fer sense recarregar la pàgina sencera, mantenint l'experiència d'aplicació fluid.
+1.  **Migració al model SPA**: Heu d'adaptar el formulari de registre que vau programar al Lab 2 per a que funcioni dins del model SPA d'aquest template (usant AJAX per a l'enviament i càrrega de fragments).
+2.  **Implementació de Casos d'Ús**: Heu de reflectir tots els casos d'ús identificats per als diferents rols del vostre diagrama:
+    *   **Usuari Anònim**: (ex: Login, Registre).
+    *   **Usuari Registrat**: (ex: Perfil personal, Timeline, Seguir/Deixar de seguir usuaris, Publicar missatges).
+    *   **Administrador**: (ex: Gestió d'usuaris).
+3.  **Adaptació de Menús**: El menú dinàmic ha de mostrar opcions diferents segons el rol de l'usuari que hagi iniciat sessió.
+4.  **Vistes "Fantasma" (Mockups)**: Per a aquells casos d'ús que encara no tenen lògica de backend, l'objectiu és que en clicar l'opció es carregui un fragment HTML que serveixi de **placeholder**.
 
 > [!IMPORTANT]
-> Si voleu provar una alternativa moderna al mètode `$.ajax` de jQuery, reviseu el fitxer `index_fetch.html` on s'utilitza la API nativa de Javascript **Fetch**. Veureu que, a diferència de `.load()`, amb Fetch cal programar manualment l'execució dels scripts injectats (funció `App.executeScripts`).
+> Tota la interacció entre aquestes seccions s'ha de fer mitjançant AJAX (sense recarregar la pàgina sencera), utilitzant el mètode `.load()` de jQuery per a la navegació i `$.ajax` per a l'enviament de dades.
+
+> [!TIP]
+> Si voleu provar una alternativa moderna al mètode `$.ajax` de jQuery, reviseu el fitxer `index_fetch.html` on s'utilitza la API nativa de Javascript **Fetch**. Recordeu que amb Fetch cal gestionar manualment l'execució dels scripts injectats.
