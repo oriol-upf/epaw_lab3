@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#lcolumn').html('<c:if test="${not empty user.picture}"> <img src="${user.picture}" alt="Profile Picture" class="w3-circle w3-margin-bottom" style="width:100px;height:100px;object-fit:cover;"> </c:if>');
+	$('#lcolumn').load('Profile');
 });
 </script>
 
